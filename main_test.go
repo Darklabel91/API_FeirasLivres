@@ -20,6 +20,7 @@ func TestGetFairByDistrictName(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+
 }
 
 //Test for "/api/fairs/region/{searchParam}" GET

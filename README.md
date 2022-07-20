@@ -30,17 +30,17 @@ go test
 This project car create, delete, update a fair and also can read the data filtering by: district, region, name, neighbourhood and ID.
 Every method expect Status:200 and JSON content-type as show bellow:
 
-| Req    | Endpoint                               | Description                         | Expected Return   |
-|--------|----------------------------------------|-------------------------------------|-------------------|
-| POST   | /api/fairs                             | Create a new fair in database       | Status:200 - JSON |
-| GET    | /api/fairs                             | Read all fairs from database        | Status:200 - JSON | 
-| PUT    | /api/fairs/id/{searchParam}            | Update a fair by given id           | Status:200 - JSON |
-| DELETE | /api/fairs/id/{searchParam}            | Delete a fair by given id           | Status: 200       |
-| GET    | /api/fairs/district/{searchParam}      | Read fairs with given district      | Status:200 - JSON |
-| GET    | /api/fairs/region/{searchParam}        | Read fairs with given region        | Status:200 - JSON |
-| GET    | /api/fairs/name/{searchParam}          | Read fairs with given fair name     | Status:200 - JSON |
-| GET    | /api/fairs/neighbourhood/{searchParam} | Read fairs with given neighbourhood | Status:200 - JSON |
-| GET    | /api/fairs/id/{searchParam}            | Read fairs with given id            | Status:200 - JSON |
+| Req    | Endpoint                               | Description                         | Success           | Warning     | Error                      |
+|--------|----------------------------------------|-------------------------------------|-------------------|-------------|----------------------------|
+| POST   | /api/fairs                             | Create a new fair in database       | Status:200 - JSON | -           | Status: 500                |
+| GET    | /api/fairs                             | Read all fairs from database        | Status:200 - JSON | Status: 204 | Status: 500                | 
+| PUT    | /api/fairs/id/{searchParam}            | Update a fair by given id           | Status:200 - JSON |             | Status: 500                |
+| DELETE | /api/fairs/id/{searchParam}            | Delete a fair by given id           | Status: 200 - nil | -           | Status: 500                |
+| GET    | /api/fairs/district/{searchParam}      | Read fairs with given district      | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
+| GET    | /api/fairs/region/{searchParam}        | Read fairs with given region        | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
+| GET    | /api/fairs/name/{searchParam}          | Read fairs with given fair name     | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
+| GET    | /api/fairs/neighbourhood/{searchParam} | Read fairs with given neighbourhood | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
+| GET    | /api/fairs/id/{searchParam}            | Read fairs with given id            | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
 
 ### Details
 | Details                                                                                   | Description                     |
