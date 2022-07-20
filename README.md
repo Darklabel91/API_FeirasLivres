@@ -14,10 +14,16 @@ right click on "Servers->Register->Server..."
 give it a name and in "Connection" set Hostname/address with the hostname given by docker
 add login and pass
 ```
-- To run API just make sure that docker image in up and run go main.go
+## Run
+To run API just make sure that docker image in up and run go main.go
 ```
 docker-compose up
 go run main.go
+```
+## Test
+To run test just run the app and run:
+```
+go test
 ```
 
 ## API
@@ -44,7 +50,6 @@ Every method expect Status:200 and JSON content-type as show bellow:
 |[Script](https://github.com/Darklabel91/API_FeirasLivres/blob/main/database/migration.go) | Imports sigle .csv on database |
 |[Test](https://github.com/Darklabel91/API_FeirasLivres/blob/main/main_test.go) | Test all 9 possible endpoints |
 |[Log](https://github.com/Darklabel91/API_FeirasLivres/blob/main/logs.txt)  | Simple .txt log file  |
-
 
 ## Endpoint Examples
 - GET - http://localhost:8000/api/fairs/id/810
