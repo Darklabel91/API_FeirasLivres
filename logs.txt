@@ -1,0 +1,20 @@
+2022/07/19 22:51:55 Start API
+2022/07/19 22:51:55 CSV imported on database
+2022/07/19 22:53:52 get request to all fairs
+2022/07/19 22:56:04 create new fair
+2022/07/19 22:58:38 get request to "/api/fairs/id/881"
+2022/07/19 22:58:38 get request to  http://localhost:8000/api/fairs/id/881
+2022/07/19 22:58:47 update fair id 881
+2022/07/19 22:59:21 delete fair id 881
+2022/07/19 23:01:02 get request to "/api/fairs/district/ITAQUERA"
+2022/07/19 23:01:02 get request to  http://localhost:8000/api/fairs/district/ITAQUERA
+2022/07/19 23:01:22 get request to "/api/fairs/region/Leste"
+2022/07/19 23:01:22 get request to  http://localhost:8000/api/fairs/region/Leste
+2022/07/19 23:01:47 get request to "/api/fairs/name/Itaquera"
+2022/07/19 23:01:47 get request to  http://localhost:8000/api/fairs/name/Itaquera
+2022/07/19 23:01:55 get request to "/api/fairs/name/ITAQUERA"
+2022/07/19 23:01:55 get request to  http://localhost:8000/api/fairs/name/ITAQUERA
+2022/07/19 23:02:18 get request to "/api/fairs/neighbourhood/ITAQUERA"
+2022/07/19 23:02:18 get request to  http://localhost:8000/api/fairs/neighbourhood/ITAQUERA
+2022/07/19 23:02:45 get request to "/api/fairs/id/810"
+2022/07/19 23:02:45 get request to  http://localhost:8000/api/fairs/id/810
