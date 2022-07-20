@@ -7,7 +7,6 @@ import (
 	"github.com/Darklabel91/API_FeirasLivres/models"
 	"log"
 	"os"
-	"strconv"
 )
 
 //migrateCSV migrate the csv file to the database
@@ -63,12 +62,7 @@ func readCsvFile(filePath string) ([]models.Fair, error) {
 	for i, line := range csvData {
 		//ignore the header
 		if i != 0 {
-			id, err := strconv.Atoi(line[0])
-			if err != nil {
-				return nil, err
-			}
 			t := models.Fair{
-				Id:            id,
 				Longitude:     line[1],
 				Latitude:      line[2],
 				SetCen:        line[3],

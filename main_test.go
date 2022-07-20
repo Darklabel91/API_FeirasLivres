@@ -94,7 +94,7 @@ func TestUpdateFair(t *testing.T) {
 	createFairMock()
 	defer deleteFairMock()
 
-	fairMockUpdate := models.Fair{Id: ID, Longitude: "UpdateMockLongitude", Latitude: "UpdateMockLatitude", SetCen: "UpdateMockSetCen", AreaP: "UpdateMockAreaP", CodDist: "UpdateMockCodDist", District: "UpdateMockDistrict", CodSubPref: "UpdateMockCodSubPref", SubPref: "UpdateMockSubPref", RegionFive: "UpdateMockRegion5", RegionEight: "UpdateMockRegion8", NameFair: "UpdateMockNameFair", Record: "UpdateMockRecord", Street: "UpdateMockStreet", Number: "UpdateMockNumber", Neighbourhood: "UpdateMockNeighbourhood", Reference: "UpdateMockReference"}
+	fairMockUpdate := models.Fair{Longitude: "UpdateMockLongitude", Latitude: "UpdateMockLatitude", SetCen: "UpdateMockSetCen", AreaP: "UpdateMockAreaP", CodDist: "UpdateMockCodDist", District: "UpdateMockDistrict", CodSubPref: "UpdateMockCodSubPref", SubPref: "UpdateMockSubPref", RegionFive: "UpdateMockRegion5", RegionEight: "UpdateMockRegion8", NameFair: "UpdateMockNameFair", Record: "UpdateMockRecord", Street: "UpdateMockStreet", Number: "UpdateMockNumber", Neighbourhood: "UpdateMockNeighbourhood", Reference: "UpdateMockReference"}
 	jsonMockUpdate, _ := json.Marshal(fairMockUpdate)
 
 	r := routsTestSetup()
@@ -129,10 +129,9 @@ func TestCreateFair(t *testing.T) {
 }
 
 //-----------------TestFunctionBegin-----------------//
-
-//Mocking a Fair for testing purposes
 var ID int
 
+//Mocking a Fair for testing purposes
 func createFairMock() {
 	fairMock := models.Fair{
 		Longitude:     "mockLongitude",
@@ -152,13 +151,15 @@ func createFairMock() {
 		Neighbourhood: "mockNeighbourhood",
 		Reference:     "mockReference",
 	}
-	database.DB.Exec("SELECT setval('fairs_id_seq', (SELECT MAX(id) FROM fairs));")
 	database.DB.Create(&fairMock)
-	ID = fairMock.Id
+
+	var scan int64
+	database.DB.Select("MAX(id)").Table("fairs").Scan(&scan)
+	ID = int(scan)
 }
 func deleteFairMock() {
 	var fairMock models.Fair
-	database.DB.Delete(&fairMock, ID)
+	database.DB.Delete(&fairMock, strconv.Itoa(ID))
 }
 
 //Use search type and search param to find a specific fair "/api/fairs/{searchType}/{searchParam}"

@@ -18,6 +18,8 @@ func Connect() {
 	if err != nil {
 		log.Println("ERROR: connection error")
 	}
+	//because of the mass import made with the csv is nice to assure that the id sequence is ok
+	DB.Exec("SELECT setval('fairs_id_seq', (SELECT MAX(id) FROM fairs));")
 }
 
 //LoadCSV used for migrate the csv file to the database

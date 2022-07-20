@@ -18,12 +18,17 @@ func CreateFair(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("ERROR: could not decode JSON file in: http://localhost:8000/api/fairs on POST request")
 		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 
-	//because of the mass import made with the csv is nice to assure that the id sequence is ok
-	database.DB.Exec("SELECT setval('fairs_id_seq', (SELECT MAX(id) FROM fairs));")
-	database.DB.Create(&newFair)
+	err = models.ValidateFair(&newFair)
+	if err != nil {
+		log.Println("ERROR: JSON file error, all fields must have a value")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 
+	database.DB.Create(&newFair)
 	err = json.NewEncoder(w).Encode(newFair)
 	if err != nil {
 		log.Println("ERROR: could not encode JSON file in: http://localhost:8000/api/fairs on POST request")
@@ -39,13 +44,14 @@ func DeleteFair(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["searchParam"]
 
-	var personality models.Fair
-	database.DB.Delete(&personality, id)
+	var fair models.Fair
+	database.DB.Delete(&fair, id)
 
-	err := json.NewEncoder(w).Encode(personality)
+	err := json.NewEncoder(w).Encode(fair)
 	if err != nil {
 		log.Println("ERROR: could not encode JSON file in: http://localhost:8000/api/fairs on DELETE request")
 		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 
 	log.Println("INFO: fair with id:" + id + " DELETED")
@@ -57,23 +63,41 @@ func UpdateFair(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["searchParam"]
 
-	var personality models.Fair
-	database.DB.First(&personality, id)
+	var fair models.Fair
+	database.DB.Select("*").Where("id = ?", id).Table("fairs").Find(&fair)
 
-	err := json.NewDecoder(r.Body).Decode(&personality)
+	err := json.NewDecoder(r.Body).Decode(&fair)
 	if err != nil {
 		log.Println("ERROR: could not decode JSON file in: http://localhost:8000/api/fairs on PUT request")
 		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 
-	database.DB.Save(&personality)
-	err = json.NewEncoder(w).Encode(personality)
+	err = models.ValidateFair(&fair)
+	if err != nil {
+		log.Println("ERROR: JSON file error, all fields must have a value")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	//Probably a way to do it simpler
+	sameID, err := strconv.Atoi(id)
+	if err != nil {
+		log.Println("ERROR: could not convert string to int in: http://localhost:8000/api/fairs on PUT request")
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	updateFair := models.Fair{Id: sameID, Longitude: fair.Longitude, Latitude: fair.Latitude, SetCen: fair.SetCen, AreaP: fair.AreaP, CodDist: fair.CodDist, District: fair.District, CodSubPref: fair.CodSubPref, SubPref: fair.SubPref, RegionFive: fair.RegionFive, RegionEight: fair.RegionEight, NameFair: fair.NameFair, Record: fair.Record, Street: fair.Street, Number: fair.Number, Neighbourhood: fair.Neighbourhood, Reference: fair.Reference}
+
+	database.DB.Save(&updateFair)
+	err = json.NewEncoder(w).Encode(updateFair)
 	if err != nil {
 		log.Println("ERROR: could not encode JSON file in: http://localhost:8000/api/fairs on PUT request")
 		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 
-	log.Println("INFO: put request http://localhost:8000/api/fairs fair updated with ID:" + strconv.Itoa(personality.Id))
+	log.Println("INFO: put request http://localhost:8000/api/fairs fair updated with ID:" + id)
 	w.WriteHeader(http.StatusAccepted)
 }
 
@@ -132,11 +156,13 @@ func GetFairs(w http.ResponseWriter, r *http.Request) {
 	if totalFairs < 1 {
 		log.Println("WARNING: get request to http://localhost:8000/api/fairs	have return 0")
 		w.WriteHeader(http.StatusNoContent)
+		return
 	} else {
 		err := json.NewEncoder(w).Encode(fairs)
 		if err != nil {
 			log.Println("ERROR: could not encode JSON file in: http://localhost:8000/api/fairs")
 			w.WriteHeader(http.StatusInternalServerError)
+			return
 		}
 
 		log.Println("INFO: get request to http://localhost:8000/api/fairs" + "	fairs found:" + strconv.Itoa(int(totalFairs)))

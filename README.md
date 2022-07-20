@@ -1,11 +1,6 @@
 # API_FeirasLivres
 API developed to use data made available in [Feiras Livres](http://www.prefeitura.sp.gov.br/cidade/secretarias/upload/chamadas/feiras_livres_1429113213.zip) and apply a simple CRUD.
-For the documentation read [Documentation](https://pkg.go.dev/github.com/Darklabel91/API_FeirasLivres#section-readme)
-
-## Documentation
-[API](https://pkg.go.dev/github.com/Darklabel91/API_FeirasLivres/API)
-[DATABASE](https://pkg.go.dev/github.com/Darklabel91/API_FeirasLivres/database)
-[MODELS](https://pkg.go.dev/github.com/Darklabel91/API_FeirasLivres/models)
+For documentation read [Documentation](https://pkg.go.dev/github.com/Darklabel91/API_FeirasLivres#section-readme)
 
 ## Setup
 - Run docker and get hostname
