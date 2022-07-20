@@ -29,6 +29,27 @@ func CreateFair(w http.ResponseWriter, r *http.Request) {
 	log.Println("create new fair")
 }
 
+//UpdateFair edit fair by given id
+func UpdateFair(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["searchParam"]
+
+	var personality models.Fair
+	database.DB.First(&personality, id)
+	err := json.NewDecoder(r.Body).Decode(&personality)
+	if err != nil {
+		log.Println(err)
+	}
+
+	database.DB.Save(&personality)
+	err = json.NewEncoder(w).Encode(personality)
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println("update fair id " + id)
+}
+
 //GetFair read and find fair
 func GetFair(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
