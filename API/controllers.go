@@ -9,6 +9,26 @@ import (
 	"net/http"
 )
 
+//CreateFair create a new Fair on database
+func CreateFair(w http.ResponseWriter, r *http.Request) {
+	var newFair models.Fair
+	err := json.NewDecoder(r.Body).Decode(&newFair)
+	if err != nil {
+		log.Println(err)
+	}
+
+	//because of the mass import made with the csv is nice to assure that the id sequence is ok
+	database.DB.Exec("SELECT setval('fairs_id_seq', (SELECT MAX(id) FROM fairs));")
+
+	database.DB.Create(&newFair)
+	err = json.NewEncoder(w).Encode(newFair)
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println("create new fair")
+}
+
 //GetFair read and find fair
 func GetFair(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
