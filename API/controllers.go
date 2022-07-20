@@ -29,6 +29,21 @@ func CreateFair(w http.ResponseWriter, r *http.Request) {
 	log.Println("create new fair")
 }
 
+//DeleteFair  deletes a fair by given id
+func DeleteFair(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["searchParam"]
+
+	var personality models.Fair
+	database.DB.Delete(&personality, id)
+	err := json.NewEncoder(w).Encode(personality)
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println("delete fair id " + id)
+}
+
 //UpdateFair edit fair by given id
 func UpdateFair(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
