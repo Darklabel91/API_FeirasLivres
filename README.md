@@ -48,7 +48,7 @@ Every method expect Status:200 and JSON content-type as show bellow:
 
 ## Endpoint Examples
 - GET - http://localhost:8000/api/fairs/id/810
-```
+```json
 [
     {
         "id": 810,
@@ -72,8 +72,9 @@ Every method expect Status:200 and JSON content-type as show bellow:
 ```
 
 - POST - http://localhost:8000/api/fairs
-```
-BODY
+body
+```json
+]
     {
         "longitude": "-46776674",
         "latitude": "-23674371",
@@ -91,7 +92,10 @@ BODY
         "neighbourhood": "JD JANGADEIRO",
         "reference": "TV RUA ROSARIO ESCARNADI"
     }
-Response
+]
+```
+response
+```json
 {
     "id": 888,
     "longitude": "-46776674",
