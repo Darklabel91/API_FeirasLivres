@@ -1,7 +1,7 @@
 # API_FeirasLivres
-API developed to use data made availebe in [Feiras Livres](http://www.prefeitura.sp.gov.br/cidade/secretarias/upload/chamadas/feiras_livres_1429113213.zip) and apply a simple CRUD.
+API developed to use data made available in [Feiras Livres](http://www.prefeitura.sp.gov.br/cidade/secretarias/upload/chamadas/feiras_livres_1429113213.zip) and apply a simple CRUD.
 
-## Steup
+## Setup
 - Run docker and get hostname
 ```
 docker-compose up
@@ -15,7 +15,7 @@ give it a name and in "Connection" set Hostname/address with the hostname given 
 add login and pass
 ```
 ## Run
-To run API just make sure that docker image in up and run go main.go
+To run API just make sure that docker image in up and:
 ```
 docker-compose up
 go run main.go
@@ -30,26 +30,26 @@ go test
 This project car create, delete, update a fair and also can read the data filtering by: district, region, name, neighbourhood and ID.
 Every method expect Status:200 and JSON content-type as show bellow:
 
- Req  | Endpoint | Description | Expected Return |
-|--------|----------|-----------|---------|
-|POST  | /api/fairs | Create a new fair in database | Status:200 - JSON |
-|GET | /api/fairs | Read all fairs from database | Status:200 - JSON  | 
-|PUT  | /api/fairs/id/{searchParam} | Update a fair by given id | Status:200 - JSON |
-|DELETE |/api/fairs/id/{searchParam}  | Delete a fair by given id |Status: 200  |
-|GET  | /api/fairs/district/{searchParam} | Read fairs with given distric | Status:200 - JSON  |
-|GET  | /api/fairs/region/{searchParam} | Read fairs with given region | Status:200 - JSON  |
-|GET  | /api/fairs/name/{searchParam} | Read fairs with given fair name | Status:200 - JSON  |
-|GET  | /api/fairs/neighbourhood/{searchParam}  | Read fairs with given neighbourhood | Status:200 - JSON  |
-|GET  | /api/fairs/id/{searchParam} | Read fairs with given id | Status:200 - JSON  |
+| Req    | Endpoint                               | Description                         | Expected Return   |
+|--------|----------------------------------------|-------------------------------------|-------------------|
+| POST   | /api/fairs                             | Create a new fair in database       | Status:200 - JSON |
+| GET    | /api/fairs                             | Read all fairs from database        | Status:200 - JSON | 
+| PUT    | /api/fairs/id/{searchParam}            | Update a fair by given id           | Status:200 - JSON |
+| DELETE | /api/fairs/id/{searchParam}            | Delete a fair by given id           | Status: 200       |
+| GET    | /api/fairs/district/{searchParam}      | Read fairs with given district      | Status:200 - JSON |
+| GET    | /api/fairs/region/{searchParam}        | Read fairs with given region        | Status:200 - JSON |
+| GET    | /api/fairs/name/{searchParam}          | Read fairs with given fair name     | Status:200 - JSON |
+| GET    | /api/fairs/neighbourhood/{searchParam} | Read fairs with given neighbourhood | Status:200 - JSON |
+| GET    | /api/fairs/id/{searchParam}            | Read fairs with given id            | Status:200 - JSON |
 
 ### Details
- Details  | Descripion |
-|--------|----------|
-|Database | Postgres  |
-|content-type | application/json  |
-|[Script](https://github.com/Darklabel91/API_FeirasLivres/blob/main/database/migration.go) | Imports sigle .csv on database |
-|[Test](https://github.com/Darklabel91/API_FeirasLivres/blob/main/main_test.go) | Test all 9 possible endpoints |
-|[Log](https://github.com/Darklabel91/API_FeirasLivres/blob/main/logs.txt)  | Simple .txt log file  |
+| Details                                                                                   | Description                     |
+|-------------------------------------------------------------------------------------------|---------------------------------|
+| Database                                                                                  | Postgres                        |
+| content-type                                                                              | application/json                |
+| [Script](https://github.com/Darklabel91/API_FeirasLivres/blob/main/database/migration.go) | Imports single .csv on database |
+| [Test](https://github.com/Darklabel91/API_FeirasLivres/blob/main/main_test.go)            | Test all 9 possible endpoints   |
+| [Log](https://github.com/Darklabel91/API_FeirasLivres/blob/main/logs.txt)                 | Simple .txt log file            |
 
 ## Endpoint Examples
 - GET - http://localhost:8000/api/fairs/id/810
@@ -80,7 +80,7 @@ Every method expect Status:200 and JSON content-type as show bellow:
 
 body
 ```json
-]
+
     {
         "longitude": "-46776674",
         "latitude": "-23674371",
@@ -98,11 +98,11 @@ body
         "neighbourhood": "JD JANGADEIRO",
         "reference": "TV RUA ROSARIO ESCARNADI"
     }
-]
+
 ```
 response
 ```json
-{
+  {
     "id": 888,
     "longitude": "-46776674",
     "latitude": "-23674371",
@@ -119,5 +119,5 @@ response
     "street": "RUA ROSARIO SCAMARTI",
     "neighbourhood": "JD JANGADEIRO",
     "reference": "TV RUA ROSARIO ESCARNADI"
-}
+  }
 ```
