@@ -3,6 +3,7 @@ module github.com/Darklabel91/API_FeirasLivres
 go 1.18
 
 require (
+	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.12.1 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
