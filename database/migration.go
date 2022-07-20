@@ -31,16 +31,16 @@ func migrateCSV(path string) error {
 			return err
 		}
 
-		log.Println("CSV imported on database")
+		log.Println("INFO: CSV imported on database")
 
 		return nil
 	}
 
-	return errors.New("csv already migrated")
+	return errors.New("ERROR: csv already migrated")
 
 }
 
-//readCsvFile reads a csv file from a given path
+//readCsvFile reads a csv file from a given path returning it as models.Fair
 func readCsvFile(filePath string) ([]models.Fair, error) {
 	var data2 []models.Fair
 

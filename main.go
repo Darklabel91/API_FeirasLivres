@@ -9,17 +9,17 @@ import (
 
 const path = "database/migration/DEINFO_AB_FEIRASLIVRES_2014.csv"
 
+//main
+//	The project starts setting up the log  writeLog.WriteLog
+//	Connect to  database.Connect
+//	Load the .csv with database.LoadCSV
+//	Start API with API.HandleRequest
 func main() {
-	//Set Log
 	writeLog.WriteLog()
-	log.Println("Start API")
+	log.Println("INFO: Start API")
 
-	//Load Database
 	database.Connect()
+	database.LoadCSV(path)
 
-	//Script for .csv file
-	_ = database.LoadCSV(path)
-
-	//API - Handle Requests
 	API.HandleRequest()
 }

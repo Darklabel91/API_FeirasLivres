@@ -11,7 +11,7 @@ import (
 	"strconv"
 )
 
-//CreateFair create a new Fair on database
+//CreateFair create new models.Fair on database
 func CreateFair(w http.ResponseWriter, r *http.Request) {
 	var newFair models.Fair
 	err := json.NewDecoder(r.Body).Decode(&newFair)
@@ -34,7 +34,7 @@ func CreateFair(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-//DeleteFair  deletes a fair by given id
+//DeleteFair  delete models.Fair by given id
 func DeleteFair(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["searchParam"]
@@ -52,7 +52,7 @@ func DeleteFair(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusAccepted)
 }
 
-//UpdateFair edit fair by given id
+//UpdateFair update models.Fair by given id
 func UpdateFair(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["searchParam"]
@@ -77,7 +77,7 @@ func UpdateFair(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusAccepted)
 }
 
-//GetFair read and find fair
+//GetFair read and find models.Fair using SearchFair
 func GetFair(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	searchType := vars["searchType"]
@@ -85,23 +85,23 @@ func GetFair(w http.ResponseWriter, r *http.Request) {
 
 	switch searchType {
 	case "district":
-		_ = searchFair(w, searchParam, searchType, "district = ?")
+		_ = SearchFair(w, searchParam, searchType, "district = ?")
 	case "region":
-		_ = searchFair(w, searchParam, searchType, "region_five = ?")
+		_ = SearchFair(w, searchParam, searchType, "region_five = ?")
 	case "name":
-		_ = searchFair(w, searchParam, searchType, "name_fair = ?")
+		_ = SearchFair(w, searchParam, searchType, "name_fair = ?")
 	case "neighbourhood":
-		_ = searchFair(w, searchParam, searchType, "neighbourhood = ?")
+		_ = SearchFair(w, searchParam, searchType, "neighbourhood = ?")
 	case "id":
-		_ = searchFair(w, searchParam, searchType, "id = ?")
+		_ = SearchFair(w, searchParam, searchType, "id = ?")
 	default:
 		log.Println("WARNING: searchType: " + searchType + " unexpected. searchType must be [district,region,name or neighbourhood]	http://localhost:8000/api/fairs/" + searchType + "/" + searchParam)
 		w.WriteHeader(http.StatusBadRequest)
 	}
 }
 
-//searchFair simple function for json return
-func searchFair(w http.ResponseWriter, searchParam, searchType, query string) error {
+//SearchFair simple function for json return using searchType with a searchParam
+func SearchFair(w http.ResponseWriter, searchParam, searchType, query string) error {
 	var foundFairs []models.Fair
 	var totalFairs int64
 
@@ -123,7 +123,7 @@ func searchFair(w http.ResponseWriter, searchParam, searchType, query string) er
 	return nil
 }
 
-//GetFairs json encode all fairs
+//GetFairs read and find all models.Fair in database
 func GetFairs(w http.ResponseWriter, r *http.Request) {
 	var fairs []models.Fair
 	var totalFairs int64

@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+//HandleRequest function to manage all routes of the API and set the content-type as JSON
 func HandleRequest() {
 	r := mux.NewRouter()
 	r.Use(contentType)
