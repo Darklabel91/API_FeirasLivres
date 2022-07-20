@@ -153,9 +153,10 @@ func createFairMock() {
 	}
 	database.DB.Create(&fairMock)
 
-	var scan int64
-	database.DB.Select("MAX(id)").Table("fairs").Scan(&scan)
-	ID = int(scan)
+	var returnedMockFair models.Fair
+	database.DB.Select("*").Where("district = ?", "mockDistrict").Table("fairs").Find(&returnedMockFair)
+
+	ID = returnedMockFair.Id
 }
 func deleteFairMock() {
 	var fairMock models.Fair
