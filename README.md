@@ -35,8 +35,8 @@ Every method expect Status:200 and JSON content-type as show bellow:
 |--------|----------------------------------------|-------------------------------------|-------------------|-------------|----------------------------|
 | POST   | /api/fairs                             | Create a new fair in database       | Status:200 - JSON | -           | Status: 500                |
 | GET    | /api/fairs                             | Read all fairs from database        | Status:200 - JSON | Status: 204 | Status: 500                | 
-| PUT    | /api/fairs/id/{searchParam}            | Update a fair by given id           | Status:200 - JSON |             | Status: 500                |
-| DELETE | /api/fairs/id/{searchParam}            | Delete a fair by given id           | Status: 200 - nil | -           | Status: 500                |
+| PUT    | /api/fairs/id/{searchParam}            | Update a fair by given id           | Status:200 - JSON | -           | Status: 500                |
+| DELETE | /api/fairs/id/{searchParam}            | Delete a fair by given id           | Status:200 - JSON | -           | Status: 500                |
 | GET    | /api/fairs/district/{searchParam}      | Read fairs with given district      | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
 | GET    | /api/fairs/region/{searchParam}        | Read fairs with given region        | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
 | GET    | /api/fairs/name/{searchParam}          | Read fairs with given fair name     | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
@@ -122,3 +122,12 @@ response
     "reference": "TV RUA ROSARIO ESCARNADI"
   }
 ```
+
+## TEST
+To run the tests:
+```
+docker-compose up
+go test
+```
+
+We use a Mock models.Fair to  run all the GET, POST PUT and DELETE end point's.
