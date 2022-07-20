@@ -77,6 +77,7 @@ Every method expect Status:200 and JSON content-type as show bellow:
 ```
 
 - POST - http://localhost:8000/api/fairs
+
 body
 ```json
 ]
