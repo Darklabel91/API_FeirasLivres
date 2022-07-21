@@ -21,11 +21,6 @@ To run API just make sure that docker image in up and:
 docker-compose up
 go run main.go
 ```
-## Test
-To run test just run the app and run:
-```
-go test
-```
 
 ## API
 This project car create, delete, update a fair and also can read the data filtering by: district, region, name, neighbourhood and ID.
