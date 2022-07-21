@@ -43,14 +43,7 @@ Every method expect Status:200 and JSON content-type as show bellow:
 | GET    | /api/fairs/neighbourhood/{searchParam} | Read fairs with given neighbourhood | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
 | GET    | /api/fairs/id/{searchParam}            | Read fairs with given id            | Status:200 - JSON | Status: 204 | Status: 500 or Status: 400 |
 
-### Details
-| Details                                                                                   | Description                     |
-|-------------------------------------------------------------------------------------------|---------------------------------|
-| Database                                                                                  | Postgres                        |
-| content-type                                                                              | application/json                |
-| [Script](https://github.com/Darklabel91/API_FeirasLivres/blob/main/database/migration.go) | Imports single .csv on database |
-| [Test](https://github.com/Darklabel91/API_FeirasLivres/blob/main/main_test.go)            | Test all 9 possible endpoints   |
-| [Log](https://github.com/Darklabel91/API_FeirasLivres/blob/main/logs.txt)                 | Simple .txt log file            |
+
 
 ## Endpoint Examples
 - GET - http://localhost:8000/api/fairs/id/810
@@ -122,6 +115,9 @@ response
     "reference": "TV RUA ROSARIO ESCARNADI"
   }
 ```
+## LOG
+- [Log](https://github.com/Darklabel91/API_FeirasLivres/blob/main/logs.txt)
+Simple log to register API behavior 
 
 ## TEST
 To run the tests:
@@ -131,3 +127,4 @@ go test
 ```
 
 We use a Mock models.Fair to  run all the GET, POST PUT and DELETE end point's.
+
