@@ -126,6 +126,9 @@ func TestCreateFair(t *testing.T) {
 		t.Error(err)
 	}
 
+	database.DB.Select("*").Where("district = ?", "CreateMockDistrict").Table("fairs").Find(&fairMockUpdate)
+	database.DB.Delete(&fairMockUpdate, strconv.Itoa(fairMockUpdate.Id))
+
 }
 
 //-----------------TestFunctionBegin-----------------//
